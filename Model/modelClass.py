@@ -8,6 +8,6 @@ class Model:
 		for i in range(0,self.rows):
 			Model.board.append([])
 			for j in range(0,self.cols):
-				Model.board[i].append([""])
+				Model.board[i].append([0])
 
 
