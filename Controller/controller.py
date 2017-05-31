@@ -22,7 +22,7 @@ pygame.init()
 myModel = modelClass.Model(8,8)
 myView = viewClass.View(myModel,510,510)
 myModel.addChangeListener(myView)
-#myModel.notifyChangeListeners("sayHello")
+
 done = False;
 while not done:
 	for event in pygame.event.get():
@@ -33,10 +33,13 @@ while not done:
 			#check if button clicked
 			if myView.testButton.isClicked():
 				print "button has been clicked"
-				mySquare = shapeClass.Square("square1",0,0)
-				print mySquare.arrOfCoordArrs
+			else: #click was within grid
+				#set value of clicked grid location to 1
+				row_pos = positionClicked[1]//(myView.WIDTH + myView.MARGIN)
+				col_pos = positionClicked[0]//(myView.WIDTH + myView.MARGIN)
+				myModel.board[row_pos][col_pos] = 1
 			 
-
+	myView.draw_grid()
 	myView.flip()
 
 pygame.quit()

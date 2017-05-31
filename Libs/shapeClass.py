@@ -7,6 +7,7 @@ class Shape:
 	#def moveDown(self):
 	
 	#def draw(self):
+		#go through coords and set color
 
 	def getCoordinates(self):
 		arr = Shape.arrOfCoordArrs

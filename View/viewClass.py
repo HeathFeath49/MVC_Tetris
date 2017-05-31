@@ -15,30 +15,40 @@ class View:
 	HEIGHT = 50
 	WIDTH = 50
 	MARGIN = 2
+	current_draw_color = BLACK
+	list_of_colors = [BLACK,RED,GREEN,WHITE]
 	pygame.font.init()
 	def __init__(self,model,disX,disY):
 		self.model = model
 		self.screen = pygame.display.set_mode((disX,disY))
 		self.screen.fill(WHITE)
-		#self.font = pygame.font.get_default_font()
-		#self.font_renderer = pygame.font.Font(default_font,size)
-		# self.button = pygame.draw.rect(self.screen,RED,[View.BTNX,View.BTNY,75,50])
-		self.testButton = buttonClass.Button(self.screen,View.BTNX,View.BTNY,75,50,RED)
-		#draw board
+		
+	def determine_draw_color(self,r,c):
+		cell_val = self.model.board[r][c]
+		color = BLACK
+		if cell_val == 1:
+			color = RED
+		self.current_draw_color = color
+	
+	def draw_grid(self):
 		for r in range(0,self.model.rows):
 			for c in range(0,self.model.cols):
+				
+				self.determine_draw_color(r,c)
 				pygame.draw.rect(self.screen,
-                             	BLACK,
+                             	self.current_draw_color,
                              	[(View.MARGIN + View.WIDTH) * c + View.MARGIN,
                               	(View.MARGIN + View.HEIGHT) * r + View.MARGIN,
                               	View.WIDTH,
                               	View.HEIGHT])
-		#draw button
+
+		self.testButton = buttonClass.Button(self.screen,View.BTNX,View.BTNY,75,50,RED)
+
 	def flip(self):
 		pygame.display.flip()
 
-	#def createSquare(self):
-
+	# def createSquare(self,name,firstRow,firstCol):
+	# 	return shapeClass.Square(self,name,firstRow,firstCol)
 # pygame.display.flip()
 
 
