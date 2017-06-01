@@ -42,7 +42,7 @@ class View:
                               	View.WIDTH,
                               	View.HEIGHT])
 
-		self.testButton = buttonClass.Button(self.screen,View.BTNX,View.BTNY,75,50,RED,"ADD SQUARE")
+		self.testButton = buttonClass.Button(self.screen,View.BTNX,View.BTNY,75,50,RED,"ADD SQUARE",9,BLACK)
 
 	def flip(self):
 		pygame.display.flip()
