@@ -30,9 +30,12 @@ while not done:
 			done = True		
 		elif event.type == pygame.MOUSEBUTTONDOWN:
 			positionClicked = pygame.mouse.get_pos()
-			#check if button clicked
+			
 			if myView.testButton.isClicked():
 				print "button has been clicked"
+				mySquare = shapeClass.Square("sq1",myModel,0,0)
+				mySquare.draw()
+
 			else: #click was within grid
 				#set value of clicked grid location to 1
 				row_pos = positionClicked[1]//(myView.WIDTH + myView.MARGIN)
