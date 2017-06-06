@@ -17,21 +17,4 @@ class Button:
 		return self.button.collidepoint(clickPos[0],clickPos[1])
 
 
-	
-
-
-
-
-
-
-	# def text_objects(self,text, font):
-	# 	textSurface = font.render(text, True, (0,0,0))
-	# 	return textSurface, textSurface.get_rect()	
-
-	# def applyText(self,text):
-	# 	smallText = pygame.font.Font("freesansbold.ttf",9)
-	# 	textSurf, textRect = self.text_objects(text, smallText)
-	# 	textRect.center = ((self.btnX+(self.height/2)),(self.btnY+(self.width/2)))
-	# 	self.surface.blit(textSurf,textRect)
-
 
