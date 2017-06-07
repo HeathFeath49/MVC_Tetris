@@ -26,8 +26,10 @@ class View:
 		self.model = model
 		self.screen = pygame.display.set_mode((disX,disY))
 		self.screen.fill(self.WHITE)
-		
-		
+
+	
+	
+
 	def determine_draw_color(self,r,c):
 		cell_val = self.model.board[r][c]
 		color = self.BLACK
@@ -50,6 +52,11 @@ class View:
 		self.resetButton = buttonClass.Button(self.screen,self.RESET_BTN_X,self.RESET_BTN_Y,75,50,self.RED,"RESET",9,self.BLACK)
 		self.startButton = buttonClass.Button(self.screen,self.START_BTN_X,self.START_BTN_Y,75,50,self.GREEN,"START",9,self.BLACK)
 
+	def refresh(self):
+		for i in range(0,self.model.rows):
+			for j in range(0,self.model.cols):
+				self.model.board[i][j] = 0 
+		
 	def flip(self):
 		pygame.display.flip()
 

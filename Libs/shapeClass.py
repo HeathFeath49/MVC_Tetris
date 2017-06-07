@@ -36,3 +36,9 @@ class Square(Shape):
 			col = self.arrOfCoordArrs[i][1]
 			self.model.board[row][col] = 1
 
+	def move_down(self):
+		for i in range(0,len(self.arrOfCoordArrs)):
+			self.arrOfCoordArrs[i][0] += 1
+			#refresh view
+
+			#print self.arrOfCoordArrs		
