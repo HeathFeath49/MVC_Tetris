@@ -7,44 +7,34 @@ import shapeClass
 
 
 
-def update_model_listeners(model):
-	for i in range(0,len(model.changeListeners)):
-		model.changeListeners[i].refresh()
-		draw_pieces(model)
-		update_falling_pieces(model)
-		model.changeListeners[i].draw_grid()
-		model.changeListeners[i].flip()
-
-def update_falling_pieces(model):
-	for i in range(0,len(model.pieces)):
-		currPiece = model.pieces[i]
-		if currPiece.arrOfCoordArrs[3][0] == 7:
-			currPiece.falling = False
-		if currPiece.falling == True:
-			#updateCoords
-			print'got here'
-			currPiece.move_down()
-
-
-def add_change_listener(model,listener):
-	model.changeListeners.append(listener)
+def update_game(model):
+	update_piece_position(model)
+	model.update_change_listeners()
 
 
 def reset_game(model):
-	for i in range(0,model.rows):
-		for j in range(0,model.cols):
-			model.board[i][j] = 0
-	model.pieces = []
+	model.clear_model()
 
 
-def draw_pieces(model):
+def update_piece_position(model):
 	for i in range(0,len(model.pieces)):
-		model.pieces[i].draw()
+		currPiece = model.pieces[i]
+		print currPiece.arrOfCoordArrs
+		if currPiece.arrOfCoordArrs[len(currPiece.arrOfCoordArrs)-1][0] == model.rows-1:
+			currPiece.falling = False
+		if currPiece.falling == True:
+			currPiece.move_down()
+			
+
+
+
+
+
 
 
 def add_square(model,start_col):
-	sq = shapeClass.Square(model,start_col)
-	model.pieces.append(sq)
+	#sq = shapeClass.Square(model,start_col)
+	model.pieces.append(shapeClass.Square(model,start_col))
 
 
 

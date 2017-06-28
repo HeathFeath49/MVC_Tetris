@@ -18,7 +18,7 @@ pygame.init()
 clock = pygame.time.Clock()
 myModel = modelClass.Model(8,8)
 myView = viewClass.View(myModel,510,510)
-myModel.addChangeListener(myView)
+myModel.add_change_listener(myView)
 
 done = False;
 while not done:
@@ -29,29 +29,15 @@ while not done:
 			positionClicked = pygame.mouse.get_pos()
 			
 			if myView.startButton.isClicked():
-				add_square(myModel,2)
+				add_square(myModel,5)
 
 			elif myView.resetButton.isClicked():
 				reset_game(myModel)
 
-	update_model_listeners(myModel)
+	update_game(myModel)
 	time.sleep(1)
 	clock.tick(60)
 
 pygame.quit()
 
 
-
-
-
-
-
-
-# else: #click was within grid
-# 	#set value of clicked grid location to 1
-# 	row_pos = positionClicked[1]//(myView.CELL_WIDTH + myView.CELL_MARGIN)
-# 	col_pos = positionClicked[0]//(myView.CELL_WIDTH + myView.CELL_MARGIN)
-# 	myModel.board[row_pos][col_pos] = 1
-
-# 	print row_pos
-# 	print col_pos
