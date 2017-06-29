@@ -29,7 +29,7 @@ while not done:
 			positionClicked = pygame.mouse.get_pos()
 			
 			if myView.startButton.isClicked():
-				add_square(myModel,5)
+				add_block(myModel,5)
 
 			elif myView.resetButton.isClicked():
 				reset_game(myModel)

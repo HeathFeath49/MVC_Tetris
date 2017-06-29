@@ -14,14 +14,23 @@ class View:
 	CELL_HEIGHT = 50
 	CELL_WIDTH = 50
 	CELL_MARGIN = 2
+
 	#colors
 	BLACK = (0, 0, 0)
 	WHITE = (255, 255, 255)
 	GREEN = (0, 255, 0)
+	LIGHT_GREEN = (4,249,111)
 	RED = (255, 0, 0)
+	ORANGE = (249,131,4)
+	YELLOW = (247,255,40)
+	PINK = (249,4,135)
+	PURPLE = (196,4,249)
+	BLUE = (40,55,255)
+
 	current_draw_color = BLACK
-	# list_of_colors = [BLACK,RED,GREEN,WHITE]
+
 	pygame.font.init()
+
 	def __init__(self,model,disX,disY):
 		self.model = model
 		self.screen = pygame.display.set_mode((disX,disY))
@@ -35,6 +44,18 @@ class View:
 		color = self.BLACK
 		if cell_val == 1:
 			color = self.RED
+		elif cell_val == 2:
+			color = self.PURPLE
+		elif cell_val == 3:
+			color = self.LIGHT_GREEN
+		elif cell_val == 4:
+			color = self.GREEN
+		elif cell_val == 5:
+			color = self.ORANGE
+		elif cell_val == 6:
+			color = self.PINK
+		elif cell_val == 7:
+			color = self.BLUE
 		self.current_draw_color = color
 	
 	def draw_grid(self):
@@ -60,9 +81,6 @@ class View:
 	def flip(self):
 		pygame.display.flip()
 
-	# def createSquare(self,name,firstRow,firstCol):
-	# 	return shapeClass.Square(self,name,firstRow,firstCol)
-# pygame.display.flip()
 
 
 

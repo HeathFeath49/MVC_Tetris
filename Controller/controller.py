@@ -1,4 +1,3 @@
-#main game loop
 #controller
 import pygame
 import sys
@@ -26,20 +25,9 @@ def update_piece_position(model):
 			currPiece.move_down()
 			
 
-
-
-
-
-
-
-def add_square(model,start_col):
+def add_block(model,start_col):
 	#sq = shapeClass.Square(model,start_col)
-	model.pieces.append(shapeClass.Square(model,start_col))
-
-
-
-#def start_button():
-
+	model.pieces.append(shapeClass.T_block(model,start_col))
 
 	
 

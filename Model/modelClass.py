@@ -1,6 +1,3 @@
-
-
-
 class Model:
 
 	board = []
@@ -23,11 +20,9 @@ class Model:
 	def update_change_listeners(self):
 		for i in range(0,len(self.changeListeners)):
 			self.changeListeners[i].refresh()
-		
 			self.set_all_board_values()
 			self.changeListeners[i].draw_grid()
 			self.changeListeners[i].flip()
-
 
 	def set_all_board_values(self):
 		for i in range(0,len(self.pieces)):
