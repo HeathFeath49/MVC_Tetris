@@ -42,20 +42,22 @@ class View:
 	def determine_draw_color(self,r,c):
 		cell_val = self.model.board[r][c]
 		color = self.BLACK
-		if cell_val == 1:
-			color = self.RED
-		elif cell_val == 2:
-			color = self.PURPLE
-		elif cell_val == 3:
-			color = self.LIGHT_GREEN
-		elif cell_val == 4:
-			color = self.GREEN
-		elif cell_val == 5:
-			color = self.ORANGE
-		elif cell_val == 6:
-			color = self.PINK
-		elif cell_val == 7:
-			color = self.BLUE
+		if cell_val != 0:  #cell is not empty
+			color_number = cell_val[0]
+			if color_number == 1:
+				color = self.RED
+			elif color_number == 2:
+				color = self.PURPLE
+			elif color_number == 3:
+				color = self.LIGHT_GREEN
+			elif color_number == 4:
+				color = self.GREEN
+			elif color_number == 5:
+				color = self.ORANGE
+			elif color_number == 6:
+				color = self.PINK
+			elif color_number == 7:
+				color = self.BLUE
 		self.current_draw_color = color
 	
 	def draw_grid(self):

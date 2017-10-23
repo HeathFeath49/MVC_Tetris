@@ -25,17 +25,12 @@ while not done:
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			done = True		
-		elif event.type == pygame.MOUSEBUTTONDOWN:
-			positionClicked = pygame.mouse.get_pos()
-			
-			if myView.startButton.isClicked():
-				add_block(myModel,5)
+		else:
+			handle_input(myModel,myView,event)
 
-			elif myView.resetButton.isClicked():
-				reset_game(myModel)
 
 	update_game(myModel)
-	time.sleep(1)
+	time.sleep(.5)
 	clock.tick(60)
 
 pygame.quit()

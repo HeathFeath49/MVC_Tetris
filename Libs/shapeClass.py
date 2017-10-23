@@ -1,4 +1,5 @@
 #shapeClass
+import uuid
 import pygame
 import sys
 sys.path.insert(0, 'C:\Users\Heather\Desktop\projects\MVC_Practice\Model')
@@ -7,36 +8,51 @@ import modelClass
 class Block:
 	arrOfCoordArrs = []
 	def __init__(self,model):
-		#self.name = name
+		
+		self.id = uuid.uuid4()
 		self.model = model
 		self.falling = True
 		self.arrOfCoordArrs = [] 
 		
 
 	def move_down(self):
+
 		for i in range(0,len(self.arrOfCoordArrs)):
 			self.arrOfCoordArrs[i][0] += 1
 
 	def move_left(self):
+
 		for i in range(0,len(self.arrOfCoordArrs)):
 			self.arrOfCoordArrs[i][1] -= 1
 
 	def move_right(self):
+
 		for i in range(0,len(self.arrOfCoordArrs)):
 			self.arrOfCoordArrs[i][1] += 1
 
 
 	def getCoordinates(self):
+
 		arr = Block.arrOfCoordArrs
 		for i in range(0,len(arr)):
 			print arr[i][0]
 			print arr[i][1]
 
 	def set_board_values(self):
+
 		for i in range(0,len(self.arrOfCoordArrs)):
 			row = self.arrOfCoordArrs[i][0]
 			col = self.arrOfCoordArrs[i][1]
-			self.model.board[row][col] = self.val
+
+			if not(row < 0):
+				self.model.board[row][col] = [self.val,self.id]
+
+	def check_for_collision(self):
+		#check for collision with ground
+		for i in range(0,len(self.arrOfCoordArrs)):
+			if self.arrOfCoordArrs[i][0] == self.model.rows-1:
+				self.falling = False
+
 
 
 class O_block(Block):
@@ -45,7 +61,7 @@ class O_block(Block):
 		Block.__init__(self,model)
 		self.firstCol = firstCol
 		self.val = 1
-		self.arrOfCoordArrs = [[-1,firstCol],[-1,firstCol+1],[0,firstCol],[0,firstCol+1]]		
+		self.arrOfCoordArrs = [[-2,firstCol],[-2,firstCol+1],[-1,firstCol],[-1,firstCol+1]]		
 
 class I_block(Block):
 
@@ -53,7 +69,7 @@ class I_block(Block):
 		Block.__init__(self,model)
 		self.firstCol = firstCol
 		self.val = 2
-		self.arrOfCoordArrs = [[-1,firstCol],[0,firstCol],[1,firstCol],[2,firstCol]]
+		self.arrOfCoordArrs = [[-4,firstCol],[-3,firstCol],[-2,firstCol],[-1,firstCol]]
 
 class J_block(Block):
 
@@ -61,7 +77,7 @@ class J_block(Block):
 		Block.__init__(self,model)
 		self.firstCol = firstCol
 		self.val = 3
-		self.arrOfCoordArrs = [[-1,firstCol+1],[0,firstCol+1],[1,firstCol+1],[1,firstCol]]
+		self.arrOfCoordArrs = [[-3,firstCol+1],[-2,firstCol+1],[-1,firstCol+1],[-1,firstCol]]
 
 class L_block(Block):
 
@@ -69,7 +85,7 @@ class L_block(Block):
 		Block.__init__(self,model)
 		self.firstCol = firstCol
 		self.val = 4
-		self.arrOfCoordArrs = [[-1,firstCol],[0,firstCol],[1,firstCol],[1,firstCol+1]]
+		self.arrOfCoordArrs = [[-3,firstCol],[-2,firstCol],[-1,firstCol],[-1,firstCol+1]]
 
 class S_block(Block):
 
@@ -77,7 +93,7 @@ class S_block(Block):
 		Block.__init__(self,model)
 		self.firstCol = firstCol
 		self.val = 5
-		self.arrOfCoordArrs = [[0,firstCol],[0,firstCol+1],[-1,firstCol+1],[-1,firstCol+2]]	
+		self.arrOfCoordArrs = [[-1,firstCol],[-1,firstCol+1],[-2,firstCol+1],[-2,firstCol+2]]	
 
 
 class Z_block(Block):
@@ -86,7 +102,7 @@ class Z_block(Block):
 		Block.__init__(self,model)
 		self.firstCol = firstCol
 		self.val = 6
-		self.arrOfCoordArrs = [[-1,firstCol],[-1,firstCol+1],[0,firstCol+1],[0,firstCol+2]]
+		self.arrOfCoordArrs = [[-2,firstCol],[-2,firstCol+1],[-1,firstCol+1],[-1,firstCol+2]]
 
 class T_block(Block):
 
@@ -94,4 +110,4 @@ class T_block(Block):
 		Block.__init__(self,model)
 		self.firstCol = firstCol
 		self.val = 7
-		self.arrOfCoordArrs = [[0,firstCol-1],[0,firstCol],[-1,firstCol],[0,firstCol+1]]
+		self.arrOfCoordArrs = [[-1,firstCol-1],[-1,firstCol],[-2,firstCol],[-1,firstCol+1]]
