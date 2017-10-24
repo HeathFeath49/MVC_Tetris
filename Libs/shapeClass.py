@@ -49,21 +49,37 @@ class Block:
 
 	def check_for_collision(self):
 
-		#TO DO:
-			# GET RID OF REPEATING CODE
+		#TO DO:  
+			#GET RID OF REPEATING CODE!!
+			#Consider replacing for loop with while loop
+
 
 		# Bottom Collision
 		for i in range(0,len(self.arrOfCoordArrs)):
 
 			curr_coord_row = self.arrOfCoordArrs[i][0]
 			curr_coord_col = self.arrOfCoordArrs[i][1]
+			#print(curr_coord_col)
+			if not(curr_coord_row < 0):
+				#check if last row
+				if curr_coord_row == self.model.rows-1:
+					self.falling = False
 
-			if curr_coord_row == self.model.rows-1:
-				self.falling = False
+					if self == self.model.active_block:
+						self.model.remove_active_block()
+					break
+				else:
+					#check if another block in the way
+					if((self.model.board[curr_coord_row+1][curr_coord_col]) != [0]):
+						if self.model.board[curr_coord_row+1][curr_coord_col][0] != self.id:
+							self.falling = False
+							if self == self.model.active_block:
+								self.model.remove_active_block()
+							break
+						
 
-				if self == self.model.active_block:
-					self.model.remove_active_block()
-				break
+
+
 						
 				
 
