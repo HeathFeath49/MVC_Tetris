@@ -42,8 +42,9 @@ class View:
 	def determine_draw_color(self,r,c):
 		cell_val = self.model.board[r][c]
 		color = self.BLACK
-		if cell_val != 0:  #cell is not empty
-			color_number = cell_val[0]
+	
+		if cell_val != [0]:  #cell is not empty
+			color_number = cell_val[1]
 			if color_number == 1:
 				color = self.RED
 			elif color_number == 2:
@@ -78,7 +79,7 @@ class View:
 	def refresh(self):
 		for i in range(0,self.model.rows):
 			for j in range(0,self.model.cols):
-				self.model.board[i][j] = 0 
+				self.model.board[i][j] = [0] 
 		
 	def flip(self):
 		pygame.display.flip()

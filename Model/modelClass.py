@@ -31,6 +31,15 @@ class Model:
 	def clear_model(self):
 		for i in range(0,self.rows):
 			for j in range(0,self.cols):
-				self.board[i][j] = 0
+				self.board[i][j] =  0
 		self.pieces = []
+
+	def set_active_block(self,block):
+		self.active_block = block
+
+	def remove_active_block(self):
+		self.active_block = 0
+
+
+
 

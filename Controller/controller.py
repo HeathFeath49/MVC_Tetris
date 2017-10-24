@@ -21,6 +21,7 @@ def reset_game(model):
 
 def handle_input(model,view,event):
 
+	#handle mouse clicks
 	if event.type == pygame.MOUSEBUTTONDOWN:
 		positionClicked = pygame.mouse.get_pos()
 		if view.startButton.isClicked():
@@ -28,6 +29,14 @@ def handle_input(model,view,event):
 
 		elif view.resetButton.isClicked():
 			reset_game(model)
+
+	#handle key presses
+	if event.type == pygame.KEYDOWN:
+		if model.active_block: #check if there is an active block
+			if event.key == 276: #left
+				model.active_block.move_left()
+			elif event.key == 275: #right
+		 		model.active_block.move_right()
 
 
 
@@ -42,8 +51,12 @@ def update_piece_position(model):
 			
 
 def add_block(model,start_col):
-	
-	model.pieces.append(shapeClass.T_block(model,start_col))
+
+	new_block = shapeClass.T_block(model,start_col)
+	model.pieces.append(new_block)
+	model.set_active_block(new_block)
+
+
 
 	
 

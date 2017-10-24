@@ -16,24 +16,24 @@ class Block:
 		
 
 	def move_down(self):
-
+		
 		for i in range(0,len(self.arrOfCoordArrs)):
 			self.arrOfCoordArrs[i][0] += 1
 
 	def move_left(self):
-
+		
 		for i in range(0,len(self.arrOfCoordArrs)):
 			self.arrOfCoordArrs[i][1] -= 1
 
 	def move_right(self):
-
+		
 		for i in range(0,len(self.arrOfCoordArrs)):
 			self.arrOfCoordArrs[i][1] += 1
 
 
 	def getCoordinates(self):
 
-		arr = Block.arrOfCoordArrs
+		arr = self.arrOfCoordArrs
 		for i in range(0,len(arr)):
 			print arr[i][0]
 			print arr[i][1]
@@ -45,13 +45,27 @@ class Block:
 			col = self.arrOfCoordArrs[i][1]
 
 			if not(row < 0):
-				self.model.board[row][col] = [self.val,self.id]
+				self.model.board[row][col] = [self.id,self.val]
 
 	def check_for_collision(self):
-		#check for collision with ground
+
+		#TO DO:
+			# GET RID OF REPEATING CODE
+
+		# Bottom Collision
 		for i in range(0,len(self.arrOfCoordArrs)):
-			if self.arrOfCoordArrs[i][0] == self.model.rows-1:
+
+			curr_coord_row = self.arrOfCoordArrs[i][0]
+			curr_coord_col = self.arrOfCoordArrs[i][1]
+
+			if curr_coord_row == self.model.rows-1:
 				self.falling = False
+
+				if self == self.model.active_block:
+					self.model.remove_active_block()
+				break
+						
+				
 
 
 
