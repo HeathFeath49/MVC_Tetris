@@ -55,7 +55,7 @@ def update_piece_position(model):
 
 def add_block(model,start_col):
 
-	new_block = shapeClass.T_block(model,start_col)
+	new_block = shapeClass.S_block(model,start_col)
 	model.pieces.append(new_block)
 	model.set_active_block(new_block)
 

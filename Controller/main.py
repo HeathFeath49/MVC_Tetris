@@ -16,7 +16,7 @@ import modelClass
 pygame.init()
 
 clock = pygame.time.Clock()
-myModel = modelClass.Model(8,8)
+myModel = modelClass.Model(13,13)
 myView = viewClass.View(myModel,510,510)
 myModel.add_change_listener(myView)
 

@@ -55,7 +55,7 @@ class Block:
 			#GET RID OF REPEATING CODE!!
 			#Consider breaking collison function into seperate functions
 			#Consider replacing for loop with while loop
-			#Add wall detection
+			#Add horizontal detetion of other blocks
 	
 		# Bottom Collision
 		for i in range(0,len(self.arrOfCoordArrs)):
@@ -79,28 +79,48 @@ class Block:
 						if self == self.model.active_block:
 							self.model.remove_active_block()
 						break
+
+
+		# Left/Right collision 				
 		for i in range(0,len(self.arrOfCoordArrs)):
 			curr_coord_row = self.arrOfCoordArrs[i][0]
 			curr_coord_col = self.arrOfCoordArrs[i][1]
+			
 			#check right wall collision
+
 			if(curr_coord_col == self.model.cols-1):
-				print('hit right')
 				self.can_move_right = False
 				break
 			else:
 				self.can_move_right = True		
 
+			#check for block to right
+
+			if (self.model.board[curr_coord_row][curr_coord_col+1] != [0]):
+				if(self.model.board[curr_coord_row][curr_coord_col+1][0] != self.id):
+					self.can_move_right = False
+					break
+			else:
+				self.can_move_right = True
 
 
 			#check left wall collision
+
 			if (curr_coord_col == 0):
-				print('hit left')
 				self.can_move_left = False
 				break
 			else:
 				self.can_move_left = True
 
 
+			#check for block to left
+
+			if (self.model.board[curr_coord_row][curr_coord_col-1] != [0]):
+				if(self.model.board[curr_coord_row][curr_coord_col-1][0] != self.id):
+					self.can_move_left = False
+					break
+			else:
+				self.can_move_left = True
 
 
 
@@ -148,7 +168,6 @@ class S_block(Block):
 		self.firstCol = firstCol
 		self.val = 5
 		self.arrOfCoordArrs = [[-1,firstCol],[-1,firstCol+1],[-2,firstCol+1],[-2,firstCol+2]]	
-
 
 class Z_block(Block):
 
