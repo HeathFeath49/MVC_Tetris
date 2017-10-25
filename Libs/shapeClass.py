@@ -11,6 +11,8 @@ class Block:
 		
 		self.id = uuid.uuid4()
 		self.model = model
+		self.can_move_left = True
+		self.can_move_right = True
 		self.falling = True
 		self.arrOfCoordArrs = [] 
 		
@@ -51,9 +53,10 @@ class Block:
 
 		#TO DO:  
 			#GET RID OF REPEATING CODE!!
+			#Consider breaking collison function into seperate functions
 			#Consider replacing for loop with while loop
-
-
+			#Add wall detection
+	
 		# Bottom Collision
 		for i in range(0,len(self.arrOfCoordArrs)):
 
@@ -68,15 +71,36 @@ class Block:
 					if self == self.model.active_block:
 						self.model.remove_active_block()
 					break
-				else:
-					#check if another block in the way
-					if((self.model.board[curr_coord_row+1][curr_coord_col]) != [0]):
-						if self.model.board[curr_coord_row+1][curr_coord_col][0] != self.id:
-							self.falling = False
-							if self == self.model.active_block:
-								self.model.remove_active_block()
-							break
-						
+				#check if another block in the way
+				elif((self.model.board[curr_coord_row+1][curr_coord_col]) != [0]):
+					
+					if self.model.board[curr_coord_row+1][curr_coord_col][0] != self.id:
+						self.falling = False
+						if self == self.model.active_block:
+							self.model.remove_active_block()
+						break
+		for i in range(0,len(self.arrOfCoordArrs)):
+			curr_coord_row = self.arrOfCoordArrs[i][0]
+			curr_coord_col = self.arrOfCoordArrs[i][1]
+			#check right wall collision
+			if(curr_coord_col == self.model.cols-1):
+				print('hit right')
+				self.can_move_right = False
+				break
+			else:
+				self.can_move_right = True		
+
+
+
+			#check left wall collision
+			if (curr_coord_col == 0):
+				print('hit left')
+				self.can_move_left = False
+				break
+			else:
+				self.can_move_left = True
+
+
 
 
 

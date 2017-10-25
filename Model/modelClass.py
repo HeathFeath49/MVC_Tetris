@@ -3,6 +3,7 @@ class Model:
 	board = []
 	pieces = []
 	changeListeners = []
+	active_block = 0
 
 
 	def __init__(self,rows,cols):

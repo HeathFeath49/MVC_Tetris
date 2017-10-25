@@ -20,7 +20,8 @@ def reset_game(model):
 
 
 def handle_input(model,view,event):
-
+	if model.active_block:
+		model.active_block.check_for_collision()
 	#handle mouse clicks
 	if event.type == pygame.MOUSEBUTTONDOWN:
 		positionClicked = pygame.mouse.get_pos()
@@ -34,9 +35,11 @@ def handle_input(model,view,event):
 	if event.type == pygame.KEYDOWN:
 		if model.active_block: #check if there is an active block
 			if event.key == 276: #left
-				model.active_block.move_left()
+				if model.active_block.can_move_left:
+					model.active_block.move_left()
 			elif event.key == 275: #right
-		 		model.active_block.move_right()
+				if model.active_block.can_move_right:
+		 			model.active_block.move_right()
 
 
 
