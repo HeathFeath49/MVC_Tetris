@@ -21,7 +21,8 @@ def reset_game(model):
 
 def handle_input(model,view,event):
 	if model.active_block:
-		model.active_block.check_for_collision()
+		#model.active_block.check_for_collision()
+		model.active_block.check_for_collision_V2()
 	#handle mouse clicks
 	if event.type == pygame.MOUSEBUTTONDOWN:
 		positionClicked = pygame.mouse.get_pos()
@@ -47,15 +48,16 @@ def update_piece_position(model):
 	for i in range(0,len(model.pieces)):
 
 		currPiece = model.pieces[i]
-		currPiece.check_for_collision()
+		#currPiece.check_for_collision()
+		currPiece.check_for_collision_V2()
 
-		if currPiece.falling == True:
+		if currPiece.can_move_down == True:
 			currPiece.move_down()
 			
 
 def add_block(model,start_col):
 
-	new_block = shapeClass.S_block(model,start_col)
+	new_block = shapeClass.L_block(model,start_col)
 	model.pieces.append(new_block)
 	model.set_active_block(new_block)
 

@@ -13,7 +13,7 @@ class Block:
 		self.model = model
 		self.can_move_left = True
 		self.can_move_right = True
-		self.falling = True
+		self.can_move_down = True
 		self.arrOfCoordArrs = [] 
 		
 
@@ -66,7 +66,7 @@ class Block:
 			if not(curr_coord_row < 0):
 				#check if last row
 				if curr_coord_row == self.model.rows-1:
-					self.falling = False
+					self.can_move_down = False
 
 					if self == self.model.active_block:
 						self.model.remove_active_block()
@@ -75,7 +75,7 @@ class Block:
 				elif((self.model.board[curr_coord_row+1][curr_coord_col]) != [0]):
 					
 					if self.model.board[curr_coord_row+1][curr_coord_col][0] != self.id:
-						self.falling = False
+						self.can_move_down = False
 						if self == self.model.active_block:
 							self.model.remove_active_block()
 						break
@@ -122,11 +122,81 @@ class Block:
 			else:
 				self.can_move_left = True
 
+	def check_for_collision_V2(self):
+		# BOOLS keeping track of
+		bottom_collision_detected = False
+		left_collision_detected = False
+		right_collision_detected = False
 
+		# Bottom Collision
+		i = 0
+		while(i < len(self.arrOfCoordArrs) and bottom_collision_detected == False):
+			curr_coord_row = self.arrOfCoordArrs[i][0]
+			curr_coord_col = self.arrOfCoordArrs[i][1]
 
-						
-				
+			if not(curr_coord_row < 0):
+				#check if last row
+				if (curr_coord_row == self.model.rows-1):
+					bottom_collision_detected = True
 
+				#check for block in the way
+				elif((self.model.board[curr_coord_row+1][curr_coord_col]) != [0]):
+					if (self.model.board[curr_coord_row+1][curr_coord_col][0] != self.id):
+						bottom_collision_detected = True
+
+			i+=1
+
+		# Left Collision Detection
+		i = 0
+		while(i< len(self.arrOfCoordArrs) and left_collision_detected == False):
+			curr_coord_row = self.arrOfCoordArrs[i][0]
+			curr_coord_col = self.arrOfCoordArrs[i][1]
+
+			#check left wall
+			if (curr_coord_col == 0):
+				left_collision_detected = True
+			#check for block to left
+			elif(self.model.board[curr_coord_row][curr_coord_col-1] != [0]):
+				if(self.model.board[curr_coord_row][curr_coord_col-1][0] != self.id):
+					left_collision_detected = True
+
+			i+=1		
+
+		#Right Collision Detection
+		i = 0
+		while(i< len(self.arrOfCoordArrs) and right_collision_detected == False):
+			curr_coord_row = self.arrOfCoordArrs[i][0]
+			curr_coord_col = self.arrOfCoordArrs[i][1]
+
+			#check right wall
+			if (curr_coord_col == self.model.cols-1):
+				right_collision_detected = True
+			#check for block to right
+			elif(self.model.board[curr_coord_row][curr_coord_col+1] != [0]):
+				if(self.model.board[curr_coord_row][curr_coord_col+1][0] != self.id):
+					right_collision_detected = True
+			i+=1
+
+		#check bools
+		if(left_collision_detected):
+			print('left collision detected')
+			self.can_move_left = False
+		else:
+			self.can_move_left = True
+
+		if(right_collision_detected):
+			print('right collision detected')
+			self.can_move_right = False
+		else:
+			self.can_move_right = True
+
+		if(bottom_collision_detected):
+			print('bottom collision')
+			self.can_move_down = False
+			if(self == self.model.active_block):
+				self.model.remove_active_block()
+		else:
+			self.can_move_down = True	
 
 
 class O_block(Block):
