@@ -122,12 +122,10 @@ class Block:
 			else:
 				self.can_move_left = True
 
-	def check_for_collision_V2(self):
-		# BOOLS keeping track of
-		bottom_collision_detected = False
-		left_collision_detected = False
-		right_collision_detected = False
 
+
+	def check_bottom_collision(self):
+		bottom_collision_detected = False
 		# Bottom Collision
 		i = 0
 		while(i < len(self.arrOfCoordArrs) and bottom_collision_detected == False):
@@ -145,7 +143,17 @@ class Block:
 						bottom_collision_detected = True
 
 			i+=1
+		#check bools
+		if(bottom_collision_detected):
+			print('bottom collision')
+			self.can_move_down = False
+			if(self == self.model.active_block):
+				self.model.remove_active_block()
+		else:
+			self.can_move_down = True	
 
+	def check_left_collision(self):
+		left_collision_detected = False
 		# Left Collision Detection
 		i = 0
 		while(i< len(self.arrOfCoordArrs) and left_collision_detected == False):
@@ -160,8 +168,16 @@ class Block:
 				if(self.model.board[curr_coord_row][curr_coord_col-1][0] != self.id):
 					left_collision_detected = True
 
-			i+=1		
+			i+=1	
+		#check bools
+		if(left_collision_detected):
+			print('left collision detected')
+			self.can_move_left = False
+		else:
+			self.can_move_left = True
 
+	def check_right_collision(self):
+		right_collision_detected = False			
 		#Right Collision Detection
 		i = 0
 		while(i< len(self.arrOfCoordArrs) and right_collision_detected == False):
@@ -177,26 +193,12 @@ class Block:
 					right_collision_detected = True
 			i+=1
 
-		#check bools
-		if(left_collision_detected):
-			print('left collision detected')
-			self.can_move_left = False
-		else:
-			self.can_move_left = True
-
+		#check bool
 		if(right_collision_detected):
 			print('right collision detected')
 			self.can_move_right = False
 		else:
 			self.can_move_right = True
-
-		if(bottom_collision_detected):
-			print('bottom collision')
-			self.can_move_down = False
-			if(self == self.model.active_block):
-				self.model.remove_active_block()
-		else:
-			self.can_move_down = True	
 
 
 class O_block(Block):

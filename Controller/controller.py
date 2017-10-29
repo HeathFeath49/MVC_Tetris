@@ -6,6 +6,8 @@ import shapeClass
 sys.path.insert(0, 'C:\Users\Heather\Desktop\projects\MVC_Practice\View')
 import viewClass
 
+#TO DO:
+# rename update_piece_position function
 
 
 def update_game(model):
@@ -20,9 +22,7 @@ def reset_game(model):
 
 
 def handle_input(model,view,event):
-	if model.active_block:
-		#model.active_block.check_for_collision()
-		model.active_block.check_for_collision_V2()
+
 	#handle mouse clicks
 	if event.type == pygame.MOUSEBUTTONDOWN:
 		positionClicked = pygame.mouse.get_pos()
@@ -36,9 +36,11 @@ def handle_input(model,view,event):
 	if event.type == pygame.KEYDOWN:
 		if model.active_block: #check if there is an active block
 			if event.key == 276: #left
+				model.active_block.check_left_collision()
 				if model.active_block.can_move_left:
 					model.active_block.move_left()
 			elif event.key == 275: #right
+				model.active_block.check_right_collision()
 				if model.active_block.can_move_right:
 		 			model.active_block.move_right()
 
@@ -49,7 +51,7 @@ def update_piece_position(model):
 
 		currPiece = model.pieces[i]
 		#currPiece.check_for_collision()
-		currPiece.check_for_collision_V2()
+		currPiece.check_bottom_collision()
 
 		if currPiece.can_move_down == True:
 			currPiece.move_down()
