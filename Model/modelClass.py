@@ -1,14 +1,15 @@
 class Model:
 
 	board = []
-	pieces = []
+	blocks_on_board = []
 	changeListeners = []
 	active_block = 0
 
 
-	def __init__(self,rows,cols):
+	def __init__(self,rows,cols,arr_of_block_types):
 		self.rows = rows
 		self.cols = cols
+		self.arr_of_block_types = arr_of_block_types
 		for i in range(0,self.rows):
 			Model.board.append([])
 			for j in range(0,self.cols):
@@ -26,14 +27,14 @@ class Model:
 			self.changeListeners[i].flip()
 
 	def set_all_board_values(self):
-		for i in range(0,len(self.pieces)):
-			self.pieces[i].set_board_values()
+		for i in range(0,len(self.blocks_on_board)):
+			self.blocks_on_board[i].set_board_values()
 
 	def clear_model(self):
 		for i in range(0,self.rows):
 			for j in range(0,self.cols):
 				self.board[i][j] =  0
-		self.pieces = []
+		self.blocks_on_board = []
 
 	def set_active_block(self,block):
 		self.active_block = block

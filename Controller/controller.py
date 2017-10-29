@@ -1,6 +1,7 @@
 #controller
 import pygame 
 import sys
+from random import randint
 sys.path.insert(0, 'C:\Users\Heather\Desktop\projects\MVC_Practice\Libs')
 import shapeClass
 sys.path.insert(0, 'C:\Users\Heather\Desktop\projects\MVC_Practice\View')
@@ -47,20 +48,36 @@ def handle_input(model,view,event):
 
 
 def update_piece_position(model):
-	for i in range(0,len(model.pieces)):
+	for i in range(0,len(model.blocks_on_board)):
 
-		currPiece = model.pieces[i]
-		#currPiece.check_for_collision()
+		currPiece = model.blocks_on_board[i]
 		currPiece.check_bottom_collision()
 
 		if currPiece.can_move_down == True:
 			currPiece.move_down()
+			#currPiece.rotate_block()
 			
 
 def add_block(model,start_col):
+	rand_num = randint(0,6)
+	block_letter = model.arr_of_block_types[rand_num]
 
-	new_block = shapeClass.L_block(model,start_col)
-	model.pieces.append(new_block)
+	if(block_letter == "O"):
+		new_block = shapeClass.O_block(model,start_col)
+	elif(block_letter == "I"):
+		new_block = shapeClass.I_block(model,start_col)
+	elif(block_letter == "J"):
+		new_block = shapeClass.J_block(model,start_col)
+	elif(block_letter == "L"):
+		new_block = shapeClass.L_block(model,start_col)
+	elif(block_letter == "S"):
+		new_block = shapeClass.S_block(model,start_col)
+	elif(block_letter == "Z"):
+		new_block = shapeClass.Z_block(model,start_col)
+	elif(block_letter == "T"):			
+		new_block = shapeClass.T_block(model,start_col)
+
+	model.blocks_on_board.append(new_block)
 	model.set_active_block(new_block)
 
 

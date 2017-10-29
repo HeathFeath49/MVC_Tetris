@@ -5,6 +5,11 @@ import sys
 sys.path.insert(0, 'C:\Users\Heather\Desktop\projects\MVC_Practice\Model')
 import modelClass
 
+#TO DO:
+# allow block to move left/right even
+# when some cells of the block are not
+# yet on the board
+
 class Block:
 	arrOfCoordArrs = []
 	def __init__(self,model):
@@ -49,80 +54,16 @@ class Block:
 			if not(row < 0):
 				self.model.board[row][col] = [self.id,self.val]
 
-	def check_for_collision(self):
-
-		#TO DO:  
-			#GET RID OF REPEATING CODE!!
-			#Consider breaking collison function into seperate functions
-			#Consider replacing for loop with while loop
-			#Add horizontal detetion of other blocks
+	def rotate_block(self):
+		for i in range(0,len(self.arrOfCoordArrs)):
+			curr_coord_row = self.arrOfCoordArrs[i][0]
+			curr_coord_col = self.arrOfCoordArrs[i][1]
 	
-		# Bottom Collision
-		for i in range(0,len(self.arrOfCoordArrs)):
+			new_row = curr_coord_col
+			new_col = curr_coord_row*-1
 
-			curr_coord_row = self.arrOfCoordArrs[i][0]
-			curr_coord_col = self.arrOfCoordArrs[i][1]
-			#print(curr_coord_col)
-			if not(curr_coord_row < 0):
-				#check if last row
-				if curr_coord_row == self.model.rows-1:
-					self.can_move_down = False
-
-					if self == self.model.active_block:
-						self.model.remove_active_block()
-					break
-				#check if another block in the way
-				elif((self.model.board[curr_coord_row+1][curr_coord_col]) != [0]):
-					
-					if self.model.board[curr_coord_row+1][curr_coord_col][0] != self.id:
-						self.can_move_down = False
-						if self == self.model.active_block:
-							self.model.remove_active_block()
-						break
-
-
-		# Left/Right collision 				
-		for i in range(0,len(self.arrOfCoordArrs)):
-			curr_coord_row = self.arrOfCoordArrs[i][0]
-			curr_coord_col = self.arrOfCoordArrs[i][1]
-			
-			#check right wall collision
-
-			if(curr_coord_col == self.model.cols-1):
-				self.can_move_right = False
-				break
-			else:
-				self.can_move_right = True		
-
-			#check for block to right
-
-			if (self.model.board[curr_coord_row][curr_coord_col+1] != [0]):
-				if(self.model.board[curr_coord_row][curr_coord_col+1][0] != self.id):
-					self.can_move_right = False
-					break
-			else:
-				self.can_move_right = True
-
-
-			#check left wall collision
-
-			if (curr_coord_col == 0):
-				self.can_move_left = False
-				break
-			else:
-				self.can_move_left = True
-
-
-			#check for block to left
-
-			if (self.model.board[curr_coord_row][curr_coord_col-1] != [0]):
-				if(self.model.board[curr_coord_row][curr_coord_col-1][0] != self.id):
-					self.can_move_left = False
-					break
-			else:
-				self.can_move_left = True
-
-
+			self.arrOfCoordArrs[i][0] = new_row
+			self.arrOfCoordArrs[i][1] = new_col
 
 	def check_bottom_collision(self):
 		bottom_collision_detected = False
@@ -145,7 +86,6 @@ class Block:
 			i+=1
 		#check bools
 		if(bottom_collision_detected):
-			print('bottom collision')
 			self.can_move_down = False
 			if(self == self.model.active_block):
 				self.model.remove_active_block()
@@ -159,19 +99,18 @@ class Block:
 		while(i< len(self.arrOfCoordArrs) and left_collision_detected == False):
 			curr_coord_row = self.arrOfCoordArrs[i][0]
 			curr_coord_col = self.arrOfCoordArrs[i][1]
-
-			#check left wall
-			if (curr_coord_col == 0):
-				left_collision_detected = True
-			#check for block to left
-			elif(self.model.board[curr_coord_row][curr_coord_col-1] != [0]):
-				if(self.model.board[curr_coord_row][curr_coord_col-1][0] != self.id):
+			if not(curr_coord_row < 0):
+				#check left wall
+				if (curr_coord_col == 0):
 					left_collision_detected = True
+				#check for block to left
+				elif(self.model.board[curr_coord_row][curr_coord_col-1] != [0]):
+					if(self.model.board[curr_coord_row][curr_coord_col-1][0] != self.id):
+						left_collision_detected = True
 
 			i+=1	
 		#check bools
 		if(left_collision_detected):
-			print('left collision detected')
 			self.can_move_left = False
 		else:
 			self.can_move_left = True
@@ -183,24 +122,24 @@ class Block:
 		while(i< len(self.arrOfCoordArrs) and right_collision_detected == False):
 			curr_coord_row = self.arrOfCoordArrs[i][0]
 			curr_coord_col = self.arrOfCoordArrs[i][1]
-
-			#check right wall
-			if (curr_coord_col == self.model.cols-1):
-				right_collision_detected = True
-			#check for block to right
-			elif(self.model.board[curr_coord_row][curr_coord_col+1] != [0]):
-				if(self.model.board[curr_coord_row][curr_coord_col+1][0] != self.id):
+			if not(curr_coord_row < 0):
+				#check right wall
+				if (curr_coord_col == self.model.cols-1):
 					right_collision_detected = True
+				#check for block to right
+				elif(self.model.board[curr_coord_row][curr_coord_col+1] != [0]):
+					if(self.model.board[curr_coord_row][curr_coord_col+1][0] != self.id):
+						right_collision_detected = True
 			i+=1
 
 		#check bool
 		if(right_collision_detected):
-			print('right collision detected')
 			self.can_move_right = False
 		else:
 			self.can_move_right = True
 
 
+# subclass of Blocks
 class O_block(Block):
 
 	def __init__(self,model,firstCol):
