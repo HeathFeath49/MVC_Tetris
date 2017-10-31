@@ -1,14 +1,13 @@
 #shapeClass
-import uuid
 import pygame
+import uuid
+import numpy
 import sys
 sys.path.insert(0, 'C:\Users\Heather\Desktop\projects\MVC_Practice\Model')
 import modelClass
 
 #TO DO:
-# allow block to move left/right even
-# when some cells of the block are not
-# yet on the board
+# ADD COMMENTS TO ROTATION FUNCTION
 
 class Block:
 	arrOfCoordArrs = []
@@ -56,11 +55,19 @@ class Block:
 
 	def rotate_block(self):
 		for i in range(0,len(self.arrOfCoordArrs)):
-			curr_coord_row = self.arrOfCoordArrs[i][0]
-			curr_coord_col = self.arrOfCoordArrs[i][1]
-	
-			new_row = curr_coord_col
-			new_col = curr_coord_row*-1
+			curr_coords = self.arrOfCoordArrs[i]
+			pivot_cell = self.arrOfCoordArrs[1]
+
+			#vectors/matrices
+			rotation_matrix = numpy.array([[0,1],[-1,0]])
+			pivot_vector = numpy.array(pivot_cell)
+			curr_coord_as_vector = numpy.array(curr_coords)
+			relative_vector = (curr_coord_as_vector - pivot_vector)
+			transformed_relative_vector = rotation_matrix.dot(relative_vector)
+			absolute_coords = pivot_vector+transformed_relative_vector
+			
+			new_row = absolute_coords[0]
+			new_col = absolute_coords[1]
 
 			self.arrOfCoordArrs[i][0] = new_row
 			self.arrOfCoordArrs[i][1] = new_col

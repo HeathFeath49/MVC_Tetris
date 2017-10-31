@@ -36,15 +36,17 @@ def handle_input(model,view,event):
 	#handle key presses
 	if event.type == pygame.KEYDOWN:
 		if model.active_block: #check if there is an active block
-			if event.key == 276: #left
+			if event.key == 276: #left arrow
 				model.active_block.check_left_collision()
 				if model.active_block.can_move_left:
 					model.active_block.move_left()
-			elif event.key == 275: #right
+			elif event.key == 275: #right arrow
 				model.active_block.check_right_collision()
 				if model.active_block.can_move_right:
 		 			model.active_block.move_right()
 
+		 	if event.key == 114: # R
+		 		model.active_block.rotate_block()
 
 
 def update_piece_position(model):
@@ -55,7 +57,8 @@ def update_piece_position(model):
 
 		if currPiece.can_move_down == True:
 			currPiece.move_down()
-			#currPiece.rotate_block()
+
+			
 			
 
 def add_block(model,start_col):
