@@ -7,12 +7,12 @@ import shapeClass
 
 
 class View:
-	START_BTN_X = 400
+	START_BTN_X = 100
 	START_BTN_Y = 440
-	RESET_BTN_X = 300
+	RESET_BTN_X = 200
 	RESET_BTN_Y = 440
-	CELL_HEIGHT = 30
-	CELL_WIDTH = 30
+	CELL_HEIGHT = 25
+	CELL_WIDTH = 25
 	CELL_MARGIN = 2
 
 	#colors
@@ -68,13 +68,13 @@ class View:
 				self.determine_draw_color(r,c)
 				pygame.draw.rect(self.screen,
                              	self.current_draw_color,
-                             	[(View.CELL_MARGIN + View.CELL_WIDTH) * c + View.CELL_MARGIN,
+                             	[(View.CELL_MARGIN + View.CELL_WIDTH) * c + View.CELL_MARGIN+32,
                               	(View.CELL_MARGIN + View.CELL_HEIGHT) * r + View.CELL_MARGIN,
                               	View.CELL_WIDTH,
                               	View.CELL_HEIGHT])
 
-		self.resetButton = buttonClass.Button(self.screen,self.RESET_BTN_X,self.RESET_BTN_Y,75,50,self.RED,"RESET",9,self.BLACK)
-		self.startButton = buttonClass.Button(self.screen,self.START_BTN_X,self.START_BTN_Y,75,50,self.GREEN,"START",9,self.BLACK)
+		self.resetButton = buttonClass.Button(self.screen,self.RESET_BTN_X,self.RESET_BTN_Y,75,40,self.RED,"RESET",9,self.BLACK)
+		self.startButton = buttonClass.Button(self.screen,self.START_BTN_X,self.START_BTN_Y,75,40,self.GREEN,"START",9,self.BLACK)
 
 	def refresh(self):
 		for i in range(0,self.model.rows):

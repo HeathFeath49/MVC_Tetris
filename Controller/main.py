@@ -12,11 +12,17 @@ import viewClass
 sys.path.insert(0, 'C:\Users\Heather\Desktop\projects\MVC_Practice\Model')
 import modelClass
 
+#TO DO:
+# IMPLEMENT CONTINOUS FALLING BLOCKS
+# CLEAN UP USER INTERFACE
+# IMPLEMENT DISOLVING OF FULL ROWS
+# IMPLEMENT POINTS SYSTEM 
+# IMPLEMENT POINTS INTERFACE
 
 pygame.init()
 
 clock = pygame.time.Clock()
-myModel = modelClass.Model(13,13,["O","I","J","L","S","Z","T"])
+myModel = modelClass.Model(15,10,["O","I","J","L","S","Z","T"])
 myView = viewClass.View(myModel,510,510)
 myModel.add_change_listener(myView)
 
