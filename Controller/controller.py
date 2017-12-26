@@ -9,7 +9,8 @@ import viewClass
 
 #TO DO:
 # rename update_piece_position function
-
+# get rid of start button 
+# implement continous falling pieces
 
 def update_game(model):
 
@@ -27,10 +28,7 @@ def handle_input(model,view,event):
 	#handle mouse clicks
 	if event.type == pygame.MOUSEBUTTONDOWN:
 		positionClicked = pygame.mouse.get_pos()
-		if view.startButton.isClicked():
-			add_block(model,5)
-
-		elif view.resetButton.isClicked():
+		if view.resetButton.isClicked():
 			reset_game(model)
 
 	#handle key presses
@@ -47,6 +45,7 @@ def handle_input(model,view,event):
 
 		 	if event.key == 114: # R
 		 		model.active_block.rotate_block()
+
 
 
 def update_piece_position(model):

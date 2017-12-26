@@ -28,6 +28,8 @@ myModel.add_change_listener(myView)
 
 done = False;
 while not done:
+	if myModel.active_block == 0:
+		add_block(myModel,5)
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			done = True		
