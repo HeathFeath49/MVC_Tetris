@@ -33,6 +33,7 @@ def handle_input(model,view,event):
 
 	#handle key presses
 	if event.type == pygame.KEYDOWN:
+
 		if model.active_block: #check if there is an active block
 			if event.key == 276: #left arrow
 				model.active_block.check_left_collision()
@@ -43,9 +44,15 @@ def handle_input(model,view,event):
 				if model.active_block.can_move_right:
 		 			model.active_block.move_right()
 
+		 	if event.key == 274: #down arrow
+		 		model.sleep_time = .2
+
 		 	if event.key == 114: # R
 		 		model.active_block.rotate_block()
 
+	if event.type == pygame.KEYUP:
+		if event.key == 274: #down arrow
+			model.sleep_time = .5
 
 
 def update_piece_position(model):

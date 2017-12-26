@@ -13,8 +13,8 @@ sys.path.insert(0, 'C:\Users\Heather\Desktop\projects\MVC_Practice\Model')
 import modelClass
 
 #TO DO:
-# IMPLEMENT CONTINOUS FALLING BLOCKS
 # CLEAN UP USER INTERFACE
+# IMPLEMENT ABILITY TO SPEED UP FALL
 # IMPLEMENT DISOLVING OF FULL ROWS
 # IMPLEMENT POINTS SYSTEM 
 # IMPLEMENT POINTS INTERFACE
@@ -38,7 +38,7 @@ while not done:
 
 
 	update_game(myModel)
-	time.sleep(.5)
+	time.sleep(myModel.sleep_time)
 	clock.tick(60)
 
 pygame.quit()
