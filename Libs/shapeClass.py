@@ -96,6 +96,7 @@ class Block:
 			self.can_move_down = False
 			if(self == self.model.active_block):
 				self.model.remove_active_block()
+				#NOW WOULD BE THE TIME TO CHECK FOR FULL ROWS
 		else:
 			self.can_move_down = True	
 
