@@ -7,16 +7,12 @@ import shapeClass
 sys.path.insert(0, 'C:\Users\Heather\Desktop\projects\MVC_Practice\View')
 import viewClass
 
-#TO DO:
-# rename update_piece_position function
-# get rid of start button 
-# implement continous falling pieces
+
 
 def update_game(model):
 
 	update_piece_position(model)
 	model.update_change_listeners()
-
 
 def reset_game(model):
 
@@ -45,7 +41,7 @@ def handle_input(model,view,event):
 		 			model.active_block.move_right()
 
 		 	if event.key == 274: #down arrow
-		 		model.sleep_time = .2
+		 		model.sleep_time = .1
 
 		 	if event.key == 114: # R
 		 		model.active_block.rotate_block()
@@ -64,10 +60,9 @@ def update_piece_position(model):
 		if currPiece.can_move_down == True:
 			currPiece.move_down()
 
-			
-			
-
+						
 def add_block(model,start_col):
+	
 	rand_num = randint(0,6)
 	block_letter = model.arr_of_block_types[rand_num]
 
@@ -90,6 +85,45 @@ def add_block(model,start_col):
 	model.set_active_block(new_block)
 
 
+def check_for_full_rows(model):
+	#TO DO:
+	# DISOLVE FULL ROWS
 
-	
+	list_of_full_rows = [] #list to keep track of num of rows that are full
+	keep_going = True # Want to stop if you cannot find any full rows or there are no more full rows
+	i = model.rows-1
+
+	while(i > 0 and keep_going):
+		j = 0
+		empty_cell_found = False
+
+		while(j < model.cols-1 and not empty_cell_found):
+			#print(i)
+			#print(j)
+			if(model.board[i][j] == [0]):
+				empty_cell_found = True
+			j+=1
+		
+		if not(empty_cell_found):
+			list_of_full_rows.append(i)	
+
+		i-=1
+
+	if(len(list_of_full_rows) > 0):
+		print(list_of_full_rows)
+		disolve_rows(model,list_of_full_rows)
+
+
+def disolve_rows(model,list_of_row_nums):
+	print('called disolve row')
+
+	for i in range(0,len(list_of_row_nums)):
+		num_of_row = list_of_row_nums[i]
+		
+		for c in range(0,model.cols-1):
+
+			model.board[num_of_row][c] = [0]
+
+
+
 
