@@ -14,23 +14,29 @@ import modelClass
 
 #TO DO:
 #
-# GET RID OF START BUTTON FROM VIEW CLASS (USER INTERFACE)
+# (COMPLETE) COMMENT OUT START BUTTON FROM VIEW CLASS (USER INTERFACE)
 #	-> Functionality already gotten rid of
 #
 # IMPLEMENT DISOLVING OF FULL ROWS
 #	-> Was able to implement detection of full rows but have issues when attempting to disolve those rows
 #		-> Above pieces seem to respond to a row being disolved (will fall to bottom of board after that row 
-#			has been disolved) but the color of the cells that was disolved, do not change. 
+#			has been disolved) but the color` of the cells that was disolved, do not change. 
+#	-> POSSIBLE REASON: after each game loop, there is a function that iterates over every piece on board
+#		and calls the 'set_board_values' method for that piece
+#			-> Need to figure out how to 'delete' a cell from a instance of a piece	
+#
 #
 # IMPLEMENT GAME ENDING WHEN BLOCKS REACH TOP OF BOARD
 #
 # IMPLEMENT POINTS SYSTEM
-#	-> Give model class a point attribute and add to it as rows are dissolved
-#	-> 10 points per row dissolved
+#	-> (COMPLETE) Give model class a point attribute and add to it as rows are dissolved
+#	-> (COMPLETE) 10 points per row dissolved
 #		-> Bonus points for 5 consecutive rows being dissolved   
 #
 # IMPLEMENT POINTS INTERFACE
 #	-> Add small box in which current point value (retrieve from model's point attribute) will be displayed
+#
+# FIX BUGS
 #
 #KNOWN BUGS:
 #
