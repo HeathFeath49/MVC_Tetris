@@ -2,6 +2,7 @@ class Model:
 
 	board = []
 	blocks_on_board = []
+	score = 0
 	changeListeners = []
 	sleep_time = .5
 	active_block = 0
