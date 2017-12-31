@@ -119,11 +119,11 @@ def disolve_rows(model,list_of_row_nums):
 
 	for i in range(0,len(list_of_row_nums)):
 		num_of_row = list_of_row_nums[i]
+		add_to_score(model,10)
 		for c in range(0,model.cols-1):
-			add_to_score(model,10)
 			model.board[num_of_row][c] = [0]
 
 
 def add_to_score(model,num_points):
-	model.score += points
+	model.score += num_points
 
