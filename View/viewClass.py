@@ -3,7 +3,7 @@ import sys
 sys.path.insert(0, 'C:\Users\Heather\Desktop\projects\MVC_Practice\Libs')
 import buttonClass
 import shapeClass
-
+pygame.font.init()
 
 
 class View:
@@ -27,9 +27,13 @@ class View:
 	PURPLE = (196,4,249)
 	BLUE = (40,55,255)
 
+	#fonts
+	SCORE_FONT = pygame.font.SysFont('Comic Sans MS', 30)
+
+	#other attributes
 	current_draw_color = BLACK
 
-	pygame.font.init()
+	
 
 	def __init__(self,model,disX,disY):
 		self.model = model
@@ -60,8 +64,25 @@ class View:
 			elif color_number == 7:
 				color = self.BLUE
 		self.current_draw_color = color
+
+	def display_score(self):
+		textsurface = self.SCORE_FONT.render('Score: '+ str(self.model.score), True, (0, 0, 0))
+		self.screen.blit(textsurface,(350,0))
+		
+
+
+	# def text_objects(text, font):
+ #    	textSurface = font.render(text, True, black)
+ #    	return textSurface, textSurface.get_rect()	
+
+	# def message_display(text):
+ #    	largeText = pygame.font.Font('freesansbold.ttf',115)
+ #    	TextSurf, TextRect = text_objects(text, largeText)
+ #    	TextRect.center = ((display_width/2),(display_height/2))
+ #    	gameDisplay.blit(TextSurf, TextRect)
 	
 	def draw_grid(self):
+		self.screen.fill(self.WHITE)
 		for r in range(0,self.model.rows):
 			for c in range(0,self.model.cols):
 				
@@ -74,12 +95,14 @@ class View:
                               	View.CELL_HEIGHT])
 
 		self.resetButton = buttonClass.Button(self.screen,self.RESET_BTN_X,self.RESET_BTN_Y,75,40,self.RED,"RESET",9,self.BLACK)
-		self.startButton = buttonClass.Button(self.screen,self.START_BTN_X,self.START_BTN_Y,75,40,self.GREEN,"START",9,self.BLACK)
-
+		#self.startButton = buttonClass.Button(self.screen,self.START_BTN_X,self.START_BTN_Y,75,40,self.GREEN,"START",9,self.BLACK)
+		self.display_score()
 	def refresh(self):
 		for i in range(0,self.model.rows):
 			for j in range(0,self.model.cols):
-				self.model.board[i][j] = [0] 
+				self.model.board[i][j] = [0]
+
+				
 		
 	def flip(self):
 		pygame.display.flip()
