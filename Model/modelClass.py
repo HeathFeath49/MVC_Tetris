@@ -20,7 +20,7 @@ class Model:
 	def add_change_listener(self,listener):
 		self.changeListeners.append(listener)
 
-
+	#TO DO: Move all view method calls to the refresh method 
 	def update_change_listeners(self):
 		for i in range(0,len(self.changeListeners)):
 			self.changeListeners[i].refresh()
@@ -37,6 +37,7 @@ class Model:
 			for j in range(0,self.cols):
 				self.board[i][j] =  0
 		self.blocks_on_board = []
+		self.active_block = 0
 
 	def set_active_block(self,block):
 		self.active_block = block
