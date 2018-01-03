@@ -55,12 +55,12 @@ class Block:
 
 		for i in range(0,len(self.arrOfCoordArrs)):
 			curr_element = self.arrOfCoordArrs[i]
-			if curr_element != 0:
+			if curr_element != [0]:
 				row = curr_element[0]
 				col = curr_element[1]
-
+				cell_of_shape_index = curr_element[2]
 				if not(row < 0):
-					self.model.board[row][col] = [self.id,self.val]
+					self.model.board[row][col] = [self.id,self.val,curr_element[2]]
 
 	def rotate_block(self):
 		for i in range(0,len(self.arrOfCoordArrs)):
@@ -87,7 +87,7 @@ class Block:
 		while(i < len(self.arrOfCoordArrs) and bottom_collision_detected == False):
 			curr_element = self.arrOfCoordArrs[i]
 			if(curr_element != [0]):
-				print(self.arrOfCoordArrs)
+				
 				curr_coord_row = curr_element[0]
 				curr_coord_col = curr_element[1]
 
