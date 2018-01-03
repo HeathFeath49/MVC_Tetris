@@ -68,18 +68,6 @@ class View:
 	def display_score(self):
 		textsurface = self.SCORE_FONT.render('Score: '+ str(self.model.score), True, (0, 0, 0))
 		self.screen.blit(textsurface,(350,0))
-		
-
-
-	# def text_objects(text, font):
- #    	textSurface = font.render(text, True, black)
- #    	return textSurface, textSurface.get_rect()	
-
-	# def message_display(text):
- #    	largeText = pygame.font.Font('freesansbold.ttf',115)
- #    	TextSurf, TextRect = text_objects(text, largeText)
- #    	TextRect.center = ((display_width/2),(display_height/2))
- #    	gameDisplay.blit(TextSurf, TextRect)
 	
 	def draw_grid(self):
 		self.screen.fill(self.WHITE)
@@ -94,9 +82,9 @@ class View:
                               	View.CELL_WIDTH,
                               	View.CELL_HEIGHT])
 
-		self.resetButton = buttonClass.Button(self.screen,self.RESET_BTN_X,self.RESET_BTN_Y,75,40,self.RED,"RESET",9,self.BLACK)
-		#self.startButton = buttonClass.Button(self.screen,self.START_BTN_X,self.START_BTN_Y,75,40,self.GREEN,"START",9,self.BLACK)
+		self.resetButton = buttonClass.Button(self.screen,self.RESET_BTN_X,self.RESET_BTN_Y,75,40,self.RED,"RESET",9,self.BLACK)	
 		self.display_score()
+
 	def refresh(self):
 		for i in range(0,self.model.rows):
 			for j in range(0,self.model.cols):
