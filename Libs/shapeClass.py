@@ -87,6 +87,7 @@ class Block:
 		while(i < len(self.arrOfCoordArrs) and bottom_collision_detected == False):
 			curr_element = self.arrOfCoordArrs[i]
 			if(curr_element != [0]):
+				print(self.arrOfCoordArrs)
 				curr_coord_row = curr_element[0]
 				curr_coord_col = curr_element[1]
 
@@ -172,7 +173,7 @@ class O_block(Block):
 		Block.__init__(self,model)
 		self.firstCol = firstCol
 		self.val = 1
-		self.arrOfCoordArrs = [[-2,firstCol,0],[-2,firstCol+1,1],[-1,firstCol,2],[-1,firstCol+1],3]		
+		self.arrOfCoordArrs = [[-2,firstCol,0],[-2,firstCol+1,1],[-1,firstCol,2],[-1,firstCol+1,3]]		
 
 class I_block(Block):
 
