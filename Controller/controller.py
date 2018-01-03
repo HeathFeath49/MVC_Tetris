@@ -83,7 +83,7 @@ def add_block(model,start_col):
 
 	model.blocks_on_board.append(new_block)
 	model.set_active_block(new_block)
-
+	
 
 def check_for_full_rows(model):
 	#TO DO:
@@ -115,15 +115,29 @@ def check_for_full_rows(model):
 
 
 def disolve_rows(model,list_of_row_nums):
-	print('called disolve row')
+	#print('called disolve row')
 
-	for i in range(0,len(list_of_row_nums)):
-		num_of_row = list_of_row_nums[i]
+	for r in range(0,len(list_of_row_nums)):
+		num_of_row = list_of_row_nums[r]
 		add_to_score(model,10)
 		for c in range(0,model.cols-1):
+			cell_data = model.board[num_of_row][c]
+			
+			#get index of shape in arr via shape's id
+			index_of_shape = cell_data[0] 
+			
+			curr_shape = model.blocks_on_board[index_of_shape]
+
+			index_of_coord_arr_to_set = cell_data[2]
+
+			#set val
+			curr_shape.arrOfCoordArrs[index_of_coord_arr_to_set] = [0]
+
 			model.board[num_of_row][c] = [0]
 
 
 def add_to_score(model,num_points):
 	model.score += num_points
+
+	
 

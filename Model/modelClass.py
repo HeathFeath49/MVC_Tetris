@@ -2,6 +2,7 @@ class Model:
 
 	board = []
 	blocks_on_board = []
+	num_of_blocks = 0
 	score = 0
 	changeListeners = []
 	sleep_time = .5
@@ -37,6 +38,7 @@ class Model:
 			for j in range(0,self.cols):
 				self.board[i][j] =  0
 		self.blocks_on_board = []
+		self.num_of_blocks = 0
 		self.active_block = 0
 
 	def set_active_block(self,block):
