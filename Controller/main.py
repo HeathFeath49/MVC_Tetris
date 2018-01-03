@@ -17,7 +17,7 @@ import modelClass
 # (COMPLETE) COMMENT OUT START BUTTON FROM VIEW CLASS (USER INTERFACE)
 #	-> Functionality already gotten rid of
 #
-# IMPLEMENT DISOLVING OF FULL ROWS
+# (COMPLETE) IMPLEMENT DISOLVING OF FULL ROWS
 #	-> Was able to implement detection of full rows but have issues when attempting to disolve those rows
 #		-> Above pieces seem to respond to a row being disolved (will fall to bottom of board after that row 
 #			has been disolved) but the color` of the cells that was disolved, do not change. 
@@ -33,12 +33,13 @@ import modelClass
 #	-> (COMPLETE) 10 points per row dissolved
 #		-> Bonus points for 5 consecutive rows being dissolved   
 #
-# IMPLEMENT POINTS INTERFACE
-#	-> Add small box in which current point value (retrieve from model's point attribute) will be displayed
+# (COMPLETE) IMPLEMENT POINTS INTERFACE
+#	-> (COMPLETE) Add small box in which current point value (retrieve from model's point attribute) will be displayed
 #
 # FIX BUGS
 #
 #KNOWN BUGS:
+#
 #
 # ROTATION ISSUE ON LEFT WALL 
 # 	-> When rotating pieces while up against left wall, cells of shape will 
@@ -51,7 +52,13 @@ import modelClass
 #		POSSIBLE FIX: 
 #			-> check new coords after transformation to see if they fall
 #			within range of board coords. If they do not, cancel the rotation
-#			 
+#
+# (FIXED) INDEX OUT OF RANGE ERROR 
+#   -> occurs (seemingly random times) when accessing model.blocks_on_board
+#		-> somewhere in the code, the blocks in the list are being deleted or array is being 
+#			reset.  
+#
+# (FIXED) BROKE COLLISION DETECTION FUNCTIONS DURING IMPLEMENTING OF ROW DISOLVE			 
 
 pygame.init()
 
@@ -65,6 +72,7 @@ while not done:
 	if myModel.active_block == 0:
 		check_for_full_rows(myModel)
 		add_block(myModel,5)
+		myModel.num_of_blocks += 1
 	for event in pygame.event.get():
 		#print(pygame.event.event_name(event.type))
 		if event.type == pygame.QUIT:
@@ -78,5 +86,3 @@ while not done:
 	clock.tick(60)
 
 pygame.quit()
-
-
